@@ -8,7 +8,14 @@ export interface CreateQuestionData {
 async function createQuestion (question : string) {
     await questionRepository.saveQuestion(question)
 }
+
+async function getAllQuestions () {
+    const questions = await questionRepository.getAllQuestions();
+    return questions;
+}
+
 const questionService = {
-    createQuestion
+    createQuestion,
+    getAllQuestions
 };
 export default questionService;

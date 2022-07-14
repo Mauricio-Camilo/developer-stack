@@ -16,7 +16,13 @@ export async function answer(req: Request, res: Response) {
 }
 
 export async function get(req: Request, res: Response) {
-  // TODO
+  const { question } : {question : string} = req.body;
+
+  const questions = await questionService.getAllQuestions();
+
+  const response = {questions : questions}
+  
+  res.send(response);
 }
 
 export async function getById(req: Request, res: Response) {
