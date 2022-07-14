@@ -1,5 +1,6 @@
 // TODO
 export interface CreateAnswerData {
+    questionId : number
     answer : string;
 }
 

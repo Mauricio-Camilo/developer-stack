@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import answerService from "../services/answerService.js";
 import questionService  from "../services/questionService.js";
 
 export async function create(req: Request, res: Response) {
@@ -8,15 +7,23 @@ export async function create(req: Request, res: Response) {
 
   await questionService.createQuestion(question);
   
-  res.send("Rota funcionando");
+  res.status(201);
 }
 
 export async function answer(req: Request, res: Response) {
-  // TODO
+
+  const { id } = req.params;
+
+  const questionId = parseInt(id);
+
+  const { answer } : {answer : string} = req.body;
+
+  await questionService.createAnswer(questionId, answer);
+  
+  res.status(201);
 }
 
 export async function get(req: Request, res: Response) {
-  const { question } : {question : string} = req.body;
 
   const questions = await questionService.getAllQuestions();
 
@@ -26,5 +33,10 @@ export async function get(req: Request, res: Response) {
 }
 
 export async function getById(req: Request, res: Response) {
-  // TODO
+
+  const { id : questionId } = req.params;
+
+  const question = questionService.getQuestionById(questionId);
+
+  res.send(question);
 }
